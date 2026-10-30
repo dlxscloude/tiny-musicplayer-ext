@@ -124,21 +124,7 @@ class TinyMediaService : MediaSessionService() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val initialNotification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(getString(R.string.app_name))
-            .setContentText("Loading...")
-            .setSmallIcon(R.drawable.ic_notification)
-            .setOngoing(true)
-            .build()
-
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startForeground(NOTIFICATION_ID, initialNotification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
-            } else {
-                startForeground(NOTIFICATION_ID, initialNotification)
-            }
-        } catch (ignored: Exception) {
-        }
+        updateForegroundNotification("Loading...")
 
         intent?.let {
             when (it.action) {
@@ -155,6 +141,25 @@ class TinyMediaService : MediaSessionService() {
             }
         }
         return START_STICKY
+    }
+
+    private fun updateForegroundNotification(contentText: String) {
+        val initialNotification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(contentText)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setOngoing(true)
+            .build()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(
+                NOTIFICATION_ID,
+                initialNotification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+            )
+        } else {
+            startForeground(NOTIFICATION_ID, initialNotification)
+        }
     }
 
     private fun buildCustomLayout(): ImmutableList<CommandButton> {
@@ -218,17 +223,22 @@ class TinyMediaService : MediaSessionService() {
         val p = player ?: return
 
         // 1. Instantly start playback of the selected file so playback is instant and service stays alive
-        val initialTitle = targetUri.lastPathSegment?.substringBeforeLast('.') ?: "Track"
+        val displayName = DocumentFile.fromSingleUri(this, targetUri)?.name
+            ?: targetUri.lastPathSegment
+            ?: "Track"
+        val initialTitle = displayName.substringBeforeLast('.', displayName).ifBlank { "Track" }
         val initialItem = MediaItem.Builder()
             .setUri(targetUri)
             .setMediaMetadata(
                 MediaMetadata.Builder()
                     .setTitle(initialTitle)
+                    .setDisplayTitle(initialTitle)
                     .build()
             )
             .build()
 
         p.setMediaItem(initialItem)
+        updateForegroundNotification(initialTitle)
         p.prepare()
         p.play()
 

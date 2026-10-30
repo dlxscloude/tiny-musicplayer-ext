@@ -19,7 +19,6 @@
         <activity
             android:name=".MediaLauncherActivity"
             android:exported="true"
-            android:noHistory="true"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.TinyMusic.Transparent">
             

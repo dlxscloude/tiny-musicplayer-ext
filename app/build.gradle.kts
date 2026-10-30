@@ -11,8 +11,8 @@ android {
         applicationId = "dlxs.cloude.tinymusic"
         minSdk = 26
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     buildTypes {
@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.media3:media3-exoplayer:1.4.1")
     implementation("androidx.media3:media3-session:1.4.1")
