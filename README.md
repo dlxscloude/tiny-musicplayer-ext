@@ -31,3 +31,7 @@ Everything is controlled exclusively via the system notification shade and Andro
 # Install via ADB
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
+
+## Icon Attribution
+
+<a href="https://www.flaticon.com/free-icons/treble-clef" title="treble clef icons">Treble clef icons created by Ricardo Ruiz - Flaticon</a>
