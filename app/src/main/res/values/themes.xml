@@ -1,4 +1,15 @@
 <resources>
+    <style name="NotificationControl">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:paddingHorizontal">2dp</item>
+    </style>
+
     <style name="Theme.TinyMusic.Transparent" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

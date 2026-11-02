@@ -68,9 +68,7 @@
             android:exported="true"
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
-                <action android:name="androidx.media3.session.MediaSessionService" />
                 <action android:name="dlxs.cloude.tinymusic.action.PLAY_URI" />
-                <action android:name="dlxs.cloude.tinymusic.action.CUSTOM_ACTION" />
             </intent-filter>
         </service>
 

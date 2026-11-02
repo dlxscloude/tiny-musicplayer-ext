@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/notification_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/notification_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:maxLines="1"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/action_prev"
+            style="@style/NotificationControl"
+            android:contentDescription="@string/action_prev"
+            android:text="@string/action_prev" />
+
+        <TextView
+            android:id="@+id/action_play_pause"
+            style="@style/NotificationControl"
+            android:contentDescription="@string/action_pause"
+            android:text="@string/action_pause" />
+
+        <TextView
+            android:id="@+id/action_next"
+            style="@style/NotificationControl"
+            android:contentDescription="@string/action_next"
+            android:text="@string/action_next" />
+
+        <TextView
+            android:id="@+id/action_loop"
+            style="@style/NotificationControl"
+            android:contentDescription="@string/action_loop_off"
+            android:text="@string/action_loop_off" />
+
+        <TextView
+            android:id="@+id/action_exit"
+            style="@style/NotificationControl"
+            android:contentDescription="@string/action_exit"
+            android:text="@string/action_exit" />
+    </LinearLayout>
+</LinearLayout>

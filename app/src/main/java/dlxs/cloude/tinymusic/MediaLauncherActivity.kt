@@ -1,13 +1,22 @@
 package dlxs.cloude.tinymusic
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 
 class MediaLauncherActivity : ComponentActivity() {
+    private var pendingUri: Uri? = null
+
+    private val audioPermissionRequest =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            pendingUri?.let(::startPlayback)
+            pendingUri = null
+        }
 
     private val filePicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let(::playUri)
@@ -44,6 +53,20 @@ class MediaLauncherActivity : ComponentActivity() {
     }
 
     private fun playUri(uri: Uri) {
+        val permission = if (Build.VERSION.SDK_INT >= 33) {
+            android.Manifest.permission.READ_MEDIA_AUDIO
+        } else {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            pendingUri = uri
+            audioPermissionRequest.launch(permission)
+            return
+        }
+        startPlayback(uri)
+    }
+
+    private fun startPlayback(uri: Uri) {
         val serviceIntent = Intent(this, TinyMediaService::class.java).apply {
             action = TinyMediaService.ACTION_PLAY_URI
             data = uri

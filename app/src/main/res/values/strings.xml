@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">Tiny Music</string>
-    <string name="action_close">Close</string>
-    <string name="action_loop">Loop</string>
-    <string name="action_shuffle">Shuffle</string>
+    <string name="action_prev">Prev</string>
+    <string name="action_next">Next</string>
+    <string name="action_play">Play</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_loop_on">Loop: on</string>
+    <string name="action_loop_off">Loop: off</string>
+    <string name="action_exit">Exit</string>
+    <string name="playing">Playing</string>
+    <string name="paused">Paused</string>
+    <string name="playing_looping">Playing&#160;|&#160;looping</string>
+    <string name="paused_looping">Paused&#160;|&#160;looping</string>
     <string name="channel_name">Tiny Music Playback</string>
     <string name="channel_description">Media playback controls and information</string>
     <string name="toast_open_file">Open an audio file with Tiny Music to play</string>
